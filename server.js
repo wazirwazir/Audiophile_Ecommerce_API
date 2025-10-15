@@ -7,9 +7,7 @@ const port = process.env.PORT || 3057;
 const app = express()
 
 
-
 app.use(cors())
-
 app.use(express.json())
 
 
@@ -22,7 +20,7 @@ const pg = knex({
 });
 
 
-
+//Audiophile server
 app.get('/', (req, res) => {
     pg.select('*').from('products')
     .then(user => {
@@ -101,6 +99,8 @@ app.get('/profile/:id', (req, res) => {
     }
 )
 
+
+
 app.post('/carted', (req, res) => {
     const { id } = req.body
         pg.select( 'products.name as name',
@@ -115,6 +115,8 @@ app.post('/carted', (req, res) => {
         })
         .catch(err => res.status(400).json('error performing operation'))
 })
+
+
 
 app.post('/cart', (req, res) => {
     const { user_id, product_id, quantity } = req.body
@@ -165,6 +167,7 @@ app.post('/cart', (req, res) => {
 })
 
 
+
 app.delete('/cartdelete', (req, res) => {
     const { user_id } = req.body
     pg('carted_items')
@@ -173,6 +176,7 @@ app.delete('/cartdelete', (req, res) => {
     .then(res => console.log('deleted rows', res))
     .catch(err => res.json(err))
 })
+
 
 app.listen(port, () => {
     console.log('running port 3000')
