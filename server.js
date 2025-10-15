@@ -16,11 +16,9 @@ app.use(express.json())
 const pg = knex({
     client: 'pg',
     connection: {
-    host: '127.0.0.1',
-    user: 'postgres',
-    password: 'okikiola357',
-    database: 'Audiophile_E-commerce_DB',
-},
+    connectionString: process.env.DATABASE_URL,
+    ssl:{ rejectUnauthorized: false}
+}
 });
 
 
