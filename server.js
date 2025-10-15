@@ -2,7 +2,7 @@ const express = require('express')
 const bcrypt = require('bcrypt-node')
 const cors = require('cors')
 const knex = require('knex')
-
+const port = process.env.PORT || 3057;
 
 const app = express()
 
@@ -141,8 +141,6 @@ app.post('/cart', (req, res) => {
         .catch(err => res.status(400).json('error performing operation'))
             
         } else {
-            console.log('not exists')
-            console.log(user_id, product_id, quantity)
     pg('carted_items')
         .insert({ 
                 user_id: user_id,
@@ -171,7 +169,6 @@ app.post('/cart', (req, res) => {
 
 app.delete('/cartdelete', (req, res) => {
     const { user_id } = req.body
-    console.log(user_id)
     pg('carted_items')
     .where({ user_id })
     .del()
@@ -179,6 +176,6 @@ app.delete('/cartdelete', (req, res) => {
     .catch(err => res.json(err))
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('running port 3000')
 })
