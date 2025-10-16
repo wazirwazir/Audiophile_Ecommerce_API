@@ -7,11 +7,7 @@ const port = process.env.PORT || 3057;
 const app = express()
 
 
-app.use(cors({
-    origin: ['https://audiophile-ecommerce-api-1zr9.onrender.com/'],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-}))
+app.use(cors())
 app.use(express.json())
 
 
