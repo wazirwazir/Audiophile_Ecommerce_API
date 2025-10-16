@@ -96,6 +96,7 @@ app.get('/profile/:id', (req, res) => {
             res.status(400).json('Not found')
         }}
     )
+    .catch(error => res.status(400).json('Error performing operation'))
     }
 )
 
